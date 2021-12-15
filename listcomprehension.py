@@ -78,3 +78,7 @@ for i in range(1_000_000):
     a.append(i*i)
 stop = timer()
 print(f'{stop-start:.4f} seconds')
+
+#you can print list items without any list-format. It will get printed as space-separated items in a single line
+x=[i for i in range(5)]
+print(*x)
