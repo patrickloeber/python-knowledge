@@ -19,6 +19,8 @@ def insert_user():
     db.insert({'name': 'John', 'age': 22})
     db.insert({'name': 'Max', 'age': 25})
     db.insert({'name': 'Sarah', 'age': 21, 'city': 'New York'})
+    #use insert_multiple() to insert more then one document
+    db.insert_multiple([{'name': 'Jessy', 'age': 20}, {'name': 'Mark', 'age': 27}])
 
 def search_user():
     results = db.search(User.city == 'New York') # returns a list
@@ -33,14 +35,16 @@ def search_user():
 
 def update_user():
     db.update({'age': 26}, User.name == 'Max')
+    #use update_multiple() to update more then one document
+    db.update_multiple([({'age': '21'}, User.name == 'Jessy'),({'age': '28'}, User.name == 'Mark')])
     for item in db:
         print(item)
 
     # or
-    results = db.search(User.name == 'Max')
-    for res in results:
-        res['age'] = 27
-    db.write_back(results) # write back results we retrieved
+#    results = db.search(User.name == 'Max')
+#    for res in results:
+#        res['age'] = 27
+#    db.write_back(results) # write back results we retrieved
 
     # or get and update/remove by document_id
 
@@ -65,6 +69,10 @@ def update_by_document_id():
 #### TESTS ####
 
 #db.purge() # empty db
+#purge() is giving error
+#you can use truncate() instead
+#db.truncate()
+
 
 #insert_user()
 #search_user()
@@ -72,7 +80,7 @@ def update_by_document_id():
 #delete_user()
 #update_by_document_id()
 
-print(db.all())
-# for item in db:
-#     print(item)
+#print(db.all())
+#for item in db:
+#    print(item)
 #print(len(db)) # number of items
